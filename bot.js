@@ -2,7 +2,8 @@
 // Licensed under the MIT License.
 
 const { ActivityHandler } = require('botbuilder');
-const utilities = require("./controllers/utilities")
+const utilities = require("./controllers/utilities");
+
 
 class EchoBot extends ActivityHandler {
     constructor() {
@@ -11,7 +12,7 @@ class EchoBot extends ActivityHandler {
         this.onMessage(async (context, next) => {
             utilities.detector(context.activity.text)
             .then(ndata=>{
-                return context.sendActivity(`El pendejo dijo: `+ ndata);
+                return context.sendActivity(``+ ndata);
             })
             .then(resp=>{
                 
