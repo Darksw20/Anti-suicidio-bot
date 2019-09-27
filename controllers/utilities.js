@@ -1,5 +1,5 @@
 'use strict';
-const restify = require('restify');
+const axios = require('axios');
 
 function detector(data){
     return new Promise(function(resolve,reject){
@@ -49,16 +49,12 @@ function detector(data){
 
 function memes(data){
     return new Promise(function(resolve,reject){
-        var server = restify.createServer()
-        server.post('https://api.imgflip.com/caption_image',{
-            text0: "Esto es una prueba",
-            text1: "Esto tambien"
-        })
+        axios.get('https://api.imgflip.com/get_memes')
         .then(resp=>{
-            debugger;
-            resolve()
+            
+            resolve(resp.data.data.memes[0].url)
         })
-        .catch(e=>console.error("meme "+e))
+        .catch(e=>reject(console.error("meme "+e)))
     })
     .catch(e=>console.error("memes Promise "+e))
 }

@@ -10,13 +10,12 @@ class EchoBot extends ActivityHandler {
         super();
         // See https://aka.ms/about-bot-activity-message to learn more about the message and other activity types.
         this.onMessage(async (context, next) => {
-            utilities.detector(context.activity.text)
+            utilities.memes(context.activity.text)
             .then(ndata=>{
+                
                 return context.sendActivity(``+ ndata);
             })
-            .then(resp=>{
-                
-            })
+            .catch(e=>console.error(""+e))
             // By calling next() you ensure that the next BotHandler is run.
             await next();
         });
